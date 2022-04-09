@@ -109,9 +109,9 @@ def over_adr_com(command, second_bit):
     if second_bit == "1110":
         type = "прямая относительная адресация"
         if Alphabet_inv[command[2:3]][:1] == "1":
-            memory = "IP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:]
+            memory = "IP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:].upper()
         elif Alphabet_inv[command[2:3]][:1] == "0":
-            memory = "IP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:]
+            memory = "IP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:].upper()
         for i in range(13):
             text_str = text.readline().replace("\n", "").split(" ")
             mnemonika = text_str[1] + " " + memory
@@ -141,9 +141,9 @@ def over_adr_com(command, second_bit):
     elif second_bit == "1000":
         type = "косвенная относительная адресация"
         if Alphabet_inv[command[2:3]][:1] == "1":
-            memory = "IP(-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:] + ")"
+            memory = "IP(-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:].upper() + ")"
         elif Alphabet_inv[command[2:3]][:1] == "0":
-            memory = "IP(+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:] + ")"
+            memory = "IP(+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:].upper() + ")"
         for i in range(13):
             text_str = text.readline().replace("\n", "").split(" ")
             mnemonika = text_str[1] + " " + memory
@@ -158,9 +158,9 @@ def over_adr_com(command, second_bit):
     elif second_bit == "1010":
         type = "косвенная (относительная) автоинкрементная адресация"
         if Alphabet_inv[command[2:3]][:1] == "1":
-            memory = "(IP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:] + ")+"
+            memory = "(IP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:].upper() + ")+"
         elif Alphabet_inv[command[2:3]][:1] == "0":
-            memory = "(IP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:] + ")+"
+            memory = "(IP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:].upper() + ")+"
         for i in range(13):
             text_str = text.readline().replace("\n", "").split(" ")
             mnemonika = text_str[1] + " " + memory
@@ -173,11 +173,11 @@ def over_adr_com(command, second_bit):
                                                                          :-2] + "\n\tпосле операции содержание ячейки IP-3 инкрементируется," + String)
                 print("\tКоличество обращений к памяти:" + str(int(count_memory) + 2))
     elif second_bit == "1011":
-        type = "косвенная (относительная) автоинкрементная адресация"
+        type = "косвенная (относительная) авто декрементная адресация"
         if Alphabet_inv[command[2:3]][:1] == "1":
-            memory = "-(IP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:] + ")"
+            memory = "-(IP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:].upper() + ")"
         elif Alphabet_inv[command[2:3]][:1] == "0":
-            memory = "-(IP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:] + ")"
+            memory = "-(IP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:].upper() +")"
         for i in range(13):
             text_str = text.readline().replace("\n", "").split(" ")
             mnemonika = text_str[1] + " " + memory
@@ -189,6 +189,22 @@ def over_adr_com(command, second_bit):
                 print("\tОписание:" + "M=содержание ячейки с номером " + memory.replace("(", "")[:-1][
                                                                          1:] + "\n\tперед операцией содержание ячейки IP-3 декрементируется," + String)
                 print("\tКоличество обращений к памяти:" + str(int(count_memory) + 2))
+    elif second_bit == "1100":
+        type = "адресация относительно SP"
+        if Alphabet_inv[command[2:3]][:1] == "1":
+            memory = "(SP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:].upper()+")"
+        elif Alphabet_inv[command[2:3]][:1] == "0":
+            memory = "(SP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:].upper()+")"
+        for i in range(13):
+            text_str = text.readline().replace("\n", "").split(" ")
+            mnemonika = text_str[1] + " " + memory
+            count_memory = text_str[3]
+            if text_str[0][:1] == command[:1]:
+                String = text_str[2].replace(":", " ")
+                print("\tТип адресации:" + type)
+                print("\tКоманда, мнемоника:" + command + ", " + mnemonika)
+                print("\tОписание:" + "M=" + memory + ", " + String)
+                print("\tКоличество обращений к памяти:" + count_memory)
     text.close()
 
 
@@ -213,5 +229,5 @@ def ip_dec_step(a):
     return summ
 
 info("5EE2")
-info("0C00")
+info("AB0F")
 info("F0F0")
