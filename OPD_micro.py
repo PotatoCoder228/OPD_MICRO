@@ -67,7 +67,7 @@ def non_adr_com(command):
         text_str = text.readline().replace("\n", "").split(" ")
         mnemonika = text_str[1]
         count_memory = text_str[3]
-        if text_str[0][1:2] == command[1:2]:
+        if text_str[0] == command:
             print(mnemonika)
             String = text_str[2].replace(":", " ")
             info +="\n\tТип адресации:" + type
@@ -248,5 +248,5 @@ def info_stack():
     list = commands.split(" ")
     for i in list:
         info(i)
-
+print(info("0200"))
 info_stack()
