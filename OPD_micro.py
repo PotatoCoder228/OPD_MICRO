@@ -109,9 +109,9 @@ def over_adr_com(command, second_bit):
     if second_bit == "1110":
         type = "прямая относительная адресация"
         if Alphabet_inv[command[2:3]][:1] == "1":
-            memory = "IP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))
+            memory = "IP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:]
         elif Alphabet_inv[command[2:3]][:1] == "0":
-            memory = "IP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))
+            memory = "IP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:]
         for i in range(13):
             text_str = text.readline().replace("\n", "").split(" ")
             mnemonika = text_str[1] + " " + memory
@@ -141,9 +141,9 @@ def over_adr_com(command, second_bit):
     elif second_bit == "1000":
         type = "косвенная относительная адресация"
         if Alphabet_inv[command[2:3]][:1] == "1":
-            memory = "IP(-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]]))) + ")"
+            memory = "IP(-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:] + ")"
         elif Alphabet_inv[command[2:3]][:1] == "0":
-            memory = "IP(+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]]))) + ")"
+            memory = "IP(+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:] + ")"
         for i in range(13):
             text_str = text.readline().replace("\n", "").split(" ")
             mnemonika = text_str[1] + " " + memory
@@ -158,9 +158,9 @@ def over_adr_com(command, second_bit):
     elif second_bit == "1010":
         type = "косвенная (относительная) автоинкрементная адресация"
         if Alphabet_inv[command[2:3]][:1] == "1":
-            memory = "(IP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]]))) + ")+"
+            memory = "(IP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:] + ")+"
         elif Alphabet_inv[command[2:3]][:1] == "0":
-            memory = "(IP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]]))) + ")+"
+            memory = "(IP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:] + ")+"
         for i in range(13):
             text_str = text.readline().replace("\n", "").split(" ")
             mnemonika = text_str[1] + " " + memory
@@ -175,9 +175,9 @@ def over_adr_com(command, second_bit):
     elif second_bit == "1011":
         type = "косвенная (относительная) автоинкрементная адресация"
         if Alphabet_inv[command[2:3]][:1] == "1":
-            memory = "-(IP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]]))) + ")"
+            memory = "-(IP-" + hex(int(ip_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:] + ")"
         elif Alphabet_inv[command[2:3]][:1] == "0":
-            memory = "-(IP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]]))) + ")"
+            memory = "-(IP+" + hex(int(ip_dec_step(Alphabet_inv[command[2:3]] + Alphabet_inv[command[3:4]])))[2:] + ")"
         for i in range(13):
             text_str = text.readline().replace("\n", "").split(" ")
             mnemonika = text_str[1] + " " + memory
@@ -212,5 +212,6 @@ def ip_dec_step(a):
     summ = str(summ)
     return summ
 
-info("5E13")
+info("5EE2")
 info("0C00")
+info("F0F0")
